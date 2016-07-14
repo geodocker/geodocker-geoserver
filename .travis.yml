@@ -2,27 +2,21 @@ sudo: required
 language: bash
 services:
 - docker
-
 env:
   global:
   - DOCKER_VERSION=1.11.2-0~trusty
   - ORG=${TRAVIS_REPO_SLUG%/*}
   - REPO=${TRAVIS_REPO_SLUG##*-}
   - TAG=${TRAVIS_TAG:-${TRAVIS_COMMIT:0:7}}
-
 before_install:
 - apt-cache madison docker-engine
 - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
-
 install:
 - make -e build
-
 script:
 - make -e test
-
 before_deploy:
 - docker login -p "${QUAY_PASSWORD}" -u "${QUAY_USER}" quay.io
-
 deploy:
 - provider: script
   script: make -e publish
@@ -34,7 +28,6 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-
 notifications:
   slack:
-    secure: 1FvaXFWHHoTHisPTA9Mgd/msSQefF5Ocd8jVIQCGnKYs9/wLnlBsUhZ4DzXPmPjdaFw/fVJ8uy/TkVxqaCLempzOsTxa+LbUabcHqWhCBoLqBh3Ado/wUwKDpF47eD5a5dmWtw3aNXyKl649cAGZq7vrDO5YwNScpbfz8FTEd4w/IlHGnIp0eqHvZSmXcyn2uGWdoG2iLrgLrb1GPN0UlgHE9yGsPeYBdTaDqYABCGJlrgANJYZD4rzowX/5oPRjT/RlHExwIDyL6uZ3tU/IcShZH+RMnitlhLxODpsEanDpbdyENo0UBat29ZV8bLJXVhn9h5V3g0ZnOLGcXemi2gxrOiF9R4H4F+li33nO1LAmzy0jhT7YWvBTEwAf6gHHXMGcbLrQ5etoGz3ZAqu3GfnUuS8rcLMcXdfksNxsR9/dxK0slxKQt2FQsLWnFtvSyljq0W7trinHUi07H4Tn5h2AeXlTltRGpBJPHJ7TBkMHp2L4aGfo94i4dbGFtPY0JWlU/pt+cGgLlRRHr/57QhN+VGYp/eh55FRFgasBS/fN+T+D0nllTBf7pkJOqKIz3eC3g0ODU6Q+bHo/PXNpnKO6XaFnVPcxVLh7K0RTieJROHTuP0J54QCWf0wwnP/PzdPKgNogLae6Z7z10spfdNEz8r+fISvwb95GTaX4WXQ=
+    secure: VhMpkQGa7pWnxpq4yuBvXatkR4mMa/Nx/qSjv0Gd5qHy41qGKZYAqSxWivoZLRE3rgMDeL+V/I/HRmbj6nkCYD66G4uoX9peMYY/utR6K+DDOzwYFjPyS8DCekB0nBgBBIcDBGSZxz9a/HoHASGcUUTKw9pp7PZkARtSva3Rx1EreqmOBEvX7arcwjKXkS8gYjedb1Day/HW3DlRydkWCTu9s7TDHhHf6EQkzBn6p5LA71NenVTzygkhBJzV+vKz9S4AMDBJI2f7IanYlw7J4fptTUGayasKvN+SyUtWnhApozq1WdkAz6/+fWX8sTDFQDVWZvo+8Ut4EZ0qeKbTDRyjNoOT1NZkqiRAm5NIxMaDkBgXjT7tLUGgHiyydLuAJx3iXR3k2/T7KY/A85cxIPzpqt7sdtMWNB1AoCFKv0Waw0zFrbzUmwGSxukCbR74ykcW6uEnIuE7a9/6S21h4pg2Wk9J9ti4J3hEgsdqpRSriOCgaOPTaLyZrzCLCRVmxJw7goWvOj+jazfMGcNVf9BLb6aCXR02HJncAC0tO9iZSCrx4keLt56KYi9ubvPgclOuDdmoOD1T0Yfr2IhwZSSXMWfpgVO4ndFg7bmWE3FAdAFKQVLGL3K3qEHJ3gDKlSz8K0GYhpYxE0Pnwlsr21uABriJjJbtgI7N98AMl+I=
