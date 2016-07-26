@@ -1,6 +1,6 @@
 FROM quay.io/geodocker/base:latest
 
-ENV ACCUMULO_VERSION=1.7.2
+ENV ACCUMULO_VERSION 1.7.2
 ENV GEOSERVER_VERSION 2.9.0
 ENV GEOMESA_VERSION 1.2.4
 ENV GEOWAVE_VERSION 0.9.3
@@ -50,6 +50,10 @@ RUN set -x \
   && wget -nv http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.7.2/hadoop-common-2.7.2.jar \
   && wget -nv http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs/2.7.2/hadoop-hdfs-2.7.2.jar \
   && wget -nv http://central.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating.jar
+
+RUN set -x \
+  && chown root /opt/tomcat/webapps/geoserver/* \
+  && chgrp root /opt/tomcat/webapps/geoserver/*
 
 COPY server.xml /opt/tomcat/conf/server.xml
 EXPOSE 9090
