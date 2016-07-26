@@ -52,8 +52,8 @@ RUN set -x \
   && wget -nv http://central.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating.jar
 
 RUN set -x \
-  && chown root /opt/tomcat/webapps/geoserver/* \
-  && chgrp root /opt/tomcat/webapps/geoserver/*
+  && chown root /opt/tomcat/webapps/geoserver/WEB-INF/lib/* \
+  && chgrp root /opt/tomcat/webapps/geoserver/WEB-INF/lib/*
 
 COPY server.xml /opt/tomcat/conf/server.xml
 VOLUME ["/opt/tomcat/webapps/geoserver/data"]
