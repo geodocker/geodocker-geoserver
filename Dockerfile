@@ -30,11 +30,7 @@ RUN set -x \
   && rm -rf /tmp/geoserver-wps.zip
 
 # Install geomesa specific geoserver jar
-RUN set -x \
-  && mkdir -p /tmp/geomesa \
-  && curl -sS -L http://repo.locationtech.org/content/repositories/geomesa-releases/org/locationtech/geomesa/geomesa-dist/${GEOMESA_VERSION}/geomesa-dist-${GEOMESA_VERSION}-bin.tar.gz \
-  | tar -zx -C /opt/tomcat/webapps/geoserver/WEB-INF/lib/ --strip-components=3 \
-    geomesa-${GEOMESA_VERSION}/dist/accumulo/geomesa-accumulo-distributed-runtime-${GEOMESA_VERSION}.jar
+COPY geomesa-accumulo-distributed-runtime-${GEOMESA_VERSION}.jar /opt/tomcat/webapps/geoserver/WEB-INF/lib/
 
 # Install jars for geomesa/geowave integration
 RUN set -x \
