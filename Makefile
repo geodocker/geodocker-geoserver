@@ -7,7 +7,7 @@ GEOMESA_DIST_TARBALL := geomesa-dist-${GEOMESA_VERSION}-bin.tar.gz
 GEOMESA_RUNTIME := geomesa-accumulo-distributed-runtime-${GEOMESA_VERSION}.jar
 
 .cache/${GEOMESA_DIST_TARBALL}:
-	mkdir -p .cache
+	mkdir -p .cache \
 && cd .cache \
 && curl -L -C - -O "http://repo.locationtech.org/content/repositories/geomesa-releases/org/locationtech/geomesa/geomesa-dist/${GEOMESA_VERSION}/${GEOMESA_DIST_TARBALL}"
 
