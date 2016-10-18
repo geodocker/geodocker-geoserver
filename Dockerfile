@@ -1,4 +1,4 @@
-FROM quay.io/geodocker/base:latest
+FROM quay.io/geodocker/base:0.1
 
 ENV ACCUMULO_VERSION 1.7.2
 ENV GEOSERVER_VERSION 2.9.0
