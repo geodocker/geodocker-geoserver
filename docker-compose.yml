@@ -1,0 +1,6 @@
+version: '2'
+services:
+    geoserver:
+        image: quay.io/geodocker/geoserver:latest
+        ports:
+          - 9090:9090
